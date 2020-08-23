@@ -3,13 +3,22 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { gql } from 'graphql-request'
 import { graphQLClient } from '../../graphql/client'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const { title, content, name } = JSON.parse(req.body)
+import { getSession } from 'next-auth/client'
 
-	if (req.method !== 'POST')
-		return res.status(405).send('Method not allowed 😉')
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+	if (req.method !== 'POST') return res.status(405).send('Method not allowed.')
+
+	const session = await getSession({ req })
+
+	if (!session) {
+		return res.status(400).send('Access denied.')
+	}
 
 	try {
+		const { title, content, name } = JSON.parse(req.body)
+
+		if (!title || !content || !name) throw new Error()
+
 		// Get the ID of the author
 		const data = await graphQLClient.request(
 			gql`
@@ -55,6 +64,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 		res.send('Created 👌')
 	} catch (err) {
+		console.log(err)
 		res.status(400).send('Something went wrong 😔')
 	}
 }
