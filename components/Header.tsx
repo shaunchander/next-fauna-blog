@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { signOut, signIn, useSession } from 'next-auth/client'
+import { GetStaticProps } from 'next'
 
 const Header = (props) => {
 	const [session, loading] = useSession()
