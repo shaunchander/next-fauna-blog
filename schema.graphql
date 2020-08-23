@@ -1,0 +1,17 @@
+type Post {
+	title: String!
+	content: String!
+	author: Author!
+	slug: String!
+}
+
+type Author {
+	name: String!
+	posts: [Post!]! @relation
+}
+
+type Query {
+	allPosts: [Post!]!
+	allAuthors: [Author!]!
+	post(slug: String!): Post
+}
