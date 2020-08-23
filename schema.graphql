@@ -14,4 +14,5 @@ type Query {
 	allPosts: [Post!]!
 	allAuthors: [Author!]!
 	post(slug: String!): Post
+	author(name: String!): Author
 }

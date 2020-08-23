@@ -13,10 +13,18 @@ export default function Home({ data, error }) {
 				<p>Failed to load.</p>
 			</Layout>
 		)
+
+	if (data.allPosts.data.length == 0)
+		return (
+			<Layout>
+				<p>No posts to show 😅</p>
+			</Layout>
+		)
+
 	return (
 		<Layout>
 			<div className='container'>
-				{data.allPosts.data.map((article, i) => (
+				{data.allPosts.data.reverse().map((article, i) => (
 					<Article
 						key={i}
 						author={article.author.name}
