@@ -7,7 +7,17 @@ const Header = (props) => {
 	return (
 		<header>
 			<h1>NextFauna Blog</h1>
-			<p>A blog example site made with Fauna, Next.js, and new.css!</p>
+			<p>
+				A blog example site made with Fauna, Next.js, and new.css! Check it out
+				on{' '}
+				<a
+					href='https://github.com/shaunchander/next-fauna-blog'
+					target='_blank'
+					rel='noopener noreferrer'>
+					GitHub
+				</a>
+			</p>
+
 			<div className='container'>
 				<nav>
 					<Link href='/'>
