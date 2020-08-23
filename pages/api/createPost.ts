@@ -6,6 +6,9 @@ import { graphQLClient } from '../../graphql/client'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { title, content, name } = JSON.parse(req.body)
 
+	if (req.method !== 'POST')
+		return res.status(405).send('Method not allowed 😉')
+
 	try {
 		// Get the ID of the author
 		const data = await graphQLClient.request(
